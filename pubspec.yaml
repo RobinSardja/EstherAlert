@@ -20,3 +20,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/I-can--t-get-up_en_android_v3_0_0.ppn
+    - assets/I-can--t-get-up_en_ios_v3_0_0.ppn

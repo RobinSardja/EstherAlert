@@ -1,7 +1,6 @@
 import "dart:io";
 
 import "package:flutter/material.dart";
-import "package:porcupine_flutter/porcupine.dart";
 
 import "package:porcupine_flutter/porcupine_manager.dart";
 
@@ -21,9 +20,11 @@ class _HomePageState extends State<HomePage> {
     String message = "Nothing ever happens";
 
     Future<void> createPorcupineManager() async {
-        porcupineManager = await PorcupineManager.fromBuiltInKeywords(
+        porcupineManager = await PorcupineManager.fromKeywordPaths(
             apiKey,
-            [BuiltInKeyword.PORCUPINE],
+            [
+                "assets/I-can--t-get-up_en_${platform}_v3_0_0.ppn"
+            ],
             (_) => setState( () => message = "WHAT THE FLIP" )
         );
 
