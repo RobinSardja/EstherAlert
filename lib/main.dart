@@ -1,15 +1,26 @@
 import "package:flutter/material.dart";
 
+import "package:shared_preferences/shared_preferences.dart";
+
 import "profile.dart";
 import "home.dart";
 import "settings.dart";
 
-void main() {
-    runApp( const MainApp() );
+Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    final prefs = await SharedPreferences.getInstance();
+
+    runApp( MainApp( prefs: prefs ) );
 }
 
 class MainApp extends StatefulWidget {
-    const MainApp({super.key});
+    const MainApp({
+        super.key,
+        required this.prefs
+    });
+
+    final SharedPreferences prefs;
 
     @override
     State<MainApp> createState() => _MainAppState();
@@ -44,10 +55,10 @@ class _MainAppState extends State<MainApp> {
                 body: PageView(
                     controller: pageController,
                     onPageChanged: (currentPage) => setState( () => currentIndex = currentPage ),
-                    children: const [
-                        ProfilePage(),
-                        HomePage(),
-                        SettingsPage()
+                    children: [
+                        ProfilePage( prefs: widget.prefs ),
+                        const HomePage(),
+                        const SettingsPage()
                     ]
                 ),
                 bottomNavigationBar: BottomNavigationBar(
