@@ -46,6 +46,20 @@ class _MainAppState extends State<MainApp> {
                 bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                     backgroundColor: Colors.green,
                     selectedItemColor: Colors.yellow
+                ),
+                switchTheme: SwitchThemeData(
+                    trackColor: WidgetStateProperty.resolveWith( (states) => states.contains(WidgetState.selected) ? Colors.green : null ),
+                ),
+                inputDecorationTheme: const InputDecorationTheme(
+                    enabledBorder: OutlineInputBorder(),
+                    floatingLabelStyle: TextStyle(
+                        color: Colors.green
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.green
+                        )
+                    )
                 )
             ),
             home: Scaffold(
@@ -58,7 +72,7 @@ class _MainAppState extends State<MainApp> {
                     children: [
                         ProfilePage( prefs: widget.prefs ),
                         const HomePage(),
-                        const SettingsPage()
+                        SettingsPage( prefs: widget.prefs )
                     ]
                 ),
                 bottomNavigationBar: BottomNavigationBar(

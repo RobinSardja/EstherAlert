@@ -37,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         ListTile(
                             title: TextField(
                                 decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
                                     labelText: "Name: $username"
                                 ),
                                 onSubmitted: (value) {
