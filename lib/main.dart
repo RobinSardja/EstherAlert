@@ -1,5 +1,9 @@
 import "package:flutter/material.dart";
 
+import "profile.dart";
+import "home.dart";
+import "settings.dart";
+
 void main() {
     runApp( const MainApp() );
 }
@@ -41,10 +45,10 @@ class _MainAppState extends State<MainApp> {
                     controller: pageController,
                     onPageChanged: (currentPage) => setState( () => currentIndex = currentPage ),
                     children: const [
-                        Center( child: Text( "Account" ) ),
-                        Center( child: Text( "Home" ) ),
-                        Center( child: Text( "Settings" ) )
-                    ],
+                        ProfilePage(),
+                        HomePage(),
+                        SettingsPage()
+                    ]
                 ),
                 bottomNavigationBar: BottomNavigationBar(
                     currentIndex: currentIndex,
@@ -55,7 +59,7 @@ class _MainAppState extends State<MainApp> {
                     items: const [
                         BottomNavigationBarItem(
                             icon: Icon( Icons.person ),
-                            label: "Account"
+                            label: "Profile"
                         ),
                         BottomNavigationBarItem(
                             icon: Icon( Icons.home ),
@@ -65,8 +69,8 @@ class _MainAppState extends State<MainApp> {
                             icon: Icon( Icons.settings ),
                             label: "Settings"
                         )
-                    ],
-                ),
+                    ]
+                )
             )
         );
     }
