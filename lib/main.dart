@@ -41,14 +41,11 @@ class _MainAppState extends State<MainApp> {
                 appBarTheme: const AppBarTheme(
                     backgroundColor: Colors.green,
                     centerTitle: true,
-                    foregroundColor: Colors.yellow
+                    foregroundColor: Colors.white
                 ),
                 bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                     backgroundColor: Colors.green,
                     selectedItemColor: Colors.yellow
-                ),
-                switchTheme: SwitchThemeData(
-                    trackColor: WidgetStateProperty.resolveWith( (states) => states.contains(WidgetState.selected) ? Colors.green : null ),
                 ),
                 inputDecorationTheme: const InputDecorationTheme(
                     enabledBorder: OutlineInputBorder(),
@@ -59,6 +56,15 @@ class _MainAppState extends State<MainApp> {
                         borderSide: BorderSide(
                             color: Colors.green
                         )
+                    )
+                ),
+                switchTheme: SwitchThemeData(
+                    trackColor: WidgetStateProperty.resolveWith( (states) => states.contains(WidgetState.selected) ? Colors.green : null )
+                ),
+                textButtonTheme: TextButtonThemeData(
+                    style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll( Colors.green ),
+                        foregroundColor: WidgetStatePropertyAll( Colors.white )
                     )
                 )
             ),

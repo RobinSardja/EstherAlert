@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_native_contact_picker: ^0.0.8
   porcupine_flutter: ^3.0.3
   shared_preferences: ^2.3.2
 
