@@ -1,3 +1,3 @@
-# estheralert
+# EstherAlert
 
-A new Flutter project.
+SASEhack Fall 2024
