@@ -1,5 +1,5 @@
 class DefaultData {
-    final username = "Name";
+    final username = "";
     final textEmergencyContacts = true;
 }
 
