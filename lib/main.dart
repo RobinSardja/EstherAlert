@@ -47,6 +47,10 @@ class _MainAppState extends State<MainApp> {
                     backgroundColor: Colors.green,
                     selectedItemColor: Colors.yellow
                 ),
+                floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.yellow
+                ),
                 inputDecorationTheme: const InputDecorationTheme(
                     enabledBorder: OutlineInputBorder(),
                     floatingLabelStyle: TextStyle(
@@ -77,7 +81,7 @@ class _MainAppState extends State<MainApp> {
                     onPageChanged: (currentPage) => setState( () => currentIndex = currentPage ),
                     children: [
                         ProfilePage( prefs: widget.prefs ),
-                        const HomePage(),
+                        HomePage( prefs: widget.prefs ),
                         SettingsPage( prefs: widget.prefs )
                     ]
                 ),

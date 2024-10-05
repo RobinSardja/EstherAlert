@@ -18,12 +18,14 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
+    late bool blinkFlashlight;
     late bool textEmergencyContacts;
 
     @override
     void initState() {
         super.initState();
 
+        blinkFlashlight = widget.prefs.getBool( "blinkFlashlight" ) ?? defaultData.blinkFlashlight;
         textEmergencyContacts = widget.prefs.getBool( "textEmergencyContacts" ) ?? defaultData.textEmergencyContacts;
     }
 
@@ -35,16 +37,26 @@ class _SettingsPageState extends State<SettingsPage> {
                     shrinkWrap: true,
                     children: [
                         ListTile(
+                            title: const Text( "Blink flashlight" ),
+                            trailing: Switch(
+                                value: blinkFlashlight,
+                                onChanged: (value) {
+                                    setState( () => blinkFlashlight = value );
+                                    widget.prefs.setBool( "blinkFlashlight", value );
+                                }
+                            )
+                        ),
+                        ListTile(
                             title: const Text( "Text emergency contacts" ),
                             trailing: Switch(
                                 value: textEmergencyContacts,
                                 onChanged: (value) {
                                     setState( () => textEmergencyContacts = value );
                                     widget.prefs.setBool( "textEmergencyContacts", value );
-                                },
-                            ),
+                                }
+                            )
                         )
-                    ],
+                    ]
                 )
             )
         );
