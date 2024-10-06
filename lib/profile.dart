@@ -53,6 +53,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             )
                         ),
                         ListTile(
+                            title: Center(
+                                child: Text( "Emergency contact:" )
+                            )
+                        ),
+                        ListTile(
                             title: TextButton(
                                 onPressed: () async {
                                     final contact = await contactPicker.selectContact();
@@ -63,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     widget.prefs.setString( "emergencyContactName", emergencyContactName );
                                     widget.prefs.setString( "emergencyContactNumber", emergencyContactNumber );
                                 },
-                                child: Text( emergencyContactName.isEmpty ? "Select emergency contact" : "Emergency contact: $emergencyContactName $emergencyContactNumber" )
+                                child: Text( emergencyContactName.isEmpty ? "Select emergency contact" : "$emergencyContactName $emergencyContactNumber" )
                             )
                         )
                     ]
