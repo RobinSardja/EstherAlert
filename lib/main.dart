@@ -39,42 +39,42 @@ class _MainAppState extends State<MainApp> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.red,
                     centerTitle: true,
                     foregroundColor: Colors.white
                 ),
                 bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                    backgroundColor: Colors.green,
-                    selectedItemColor: Colors.yellow
+                    backgroundColor: Colors.red,
+                    selectedItemColor: Colors.white
                 ),
                 floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.yellow
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white
                 ),
                 inputDecorationTheme: const InputDecorationTheme(
                     enabledBorder: OutlineInputBorder(),
                     floatingLabelStyle: TextStyle(
-                        color: Colors.green
+                        color: Colors.red
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            color: Colors.green
+                            color: Colors.red
                         )
                     )
                 ),
                 switchTheme: SwitchThemeData(
-                    trackColor: WidgetStateProperty.resolveWith( (states) => states.contains(WidgetState.selected) ? Colors.green : null )
+                    trackColor: WidgetStateProperty.resolveWith( (states) => states.contains(WidgetState.selected) ? Colors.red : null )
                 ),
                 textButtonTheme: TextButtonThemeData(
                     style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll( Colors.green ),
+                        backgroundColor: WidgetStatePropertyAll( Colors.red ),
                         foregroundColor: WidgetStatePropertyAll( Colors.white )
                     )
                 )
             ),
             home: Scaffold(
                 appBar: AppBar(
-                    title: const Text( "EstherAlert" )
+                    title: const Text( "Senior SOS" )
                 ),
                 body: PageView(
                     controller: pageController,
