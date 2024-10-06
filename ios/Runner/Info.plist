@@ -48,6 +48,8 @@
 
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Detecting calls for help through the microphone</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Tracking the user to notify emergency contacts of the location</string>
 
 </dict>
 </plist>

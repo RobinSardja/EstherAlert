@@ -3,6 +3,7 @@ import "dart:io";
 import "package:flutter/material.dart";
 
 import "package:flutter_sms/flutter_sms.dart";
+import "package:geolocator/geolocator.dart";
 import "package:porcupine_flutter/porcupine_manager.dart";
 import "package:shared_preferences/shared_preferences.dart";
 import "package:torch_light/torch_light.dart";
@@ -41,25 +42,32 @@ class _HomePageState extends State<HomePage> {
             [
                 "assets/I-can--t-get-up_en_${platform}_v3_0_0.ppn"
             ],
-            (_) {
-                setState( () => message = "WHAT THE FLIP" );
+            (_) async {
                 if( blinkFlashlight ) {
                     startBlinkingFlashlight();
                 }
                 if( textEmergencyContacts ) {
-                    sendSMS(
-                        message: "Senior SOS! $username needs your help!",
-                        recipients: [emergencyContactNumber.replaceAll( RegExp(r"\D"), "" ) ],
+                    await Geolocator.isLocationServiceEnabled();
+                    final position = await Geolocator.getCurrentPosition(
+                        locationSettings: LocationSettings(
+                            accuracy: LocationAccuracy.bestForNavigation,
+                            distanceFilter: 100
+                        )
+                    );
+                    await sendSMS(
+                        message: "Senior SOS! $username needs your help at this location: www.google.com/maps/search/${position.latitude},${position.longitude}/@${position.latitude},${position.longitude}",
+                        recipients: [ emergencyContactNumber.replaceAll( RegExp(r"\D"), "" ) ],
                         sendDirect: true
                     );
                 }
+                setState( () => message = "WHAT THE FLIP" );
             }
         );
 
         await porcupineManager.start();
     }
 
-    Future<void> startBlinkingFlashlight() async {
+    void startBlinkingFlashlight() async {
         final isTorchAvailable = await TorchLight.isTorchAvailable();
         if( isTorchAvailable ) {
             while( !safe ) {
@@ -84,9 +92,9 @@ class _HomePageState extends State<HomePage> {
     }
 
     @override
-    void dispose() {
-        porcupineManager.delete();
-        TorchLight.disableTorch();
+    void dispose() async {
+        await porcupineManager.delete();
+        await TorchLight.disableTorch();
 
         super.dispose();
     }

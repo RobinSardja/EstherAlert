@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "package:geolocator/geolocator.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
@@ -11,7 +12,15 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     final prefs = await SharedPreferences.getInstance();
-    await Permission.sms.request();
+
+    await Geolocator.checkPermission();
+    await [
+        Permission.location,
+        Permission.locationAlways,
+        Permission.locationWhenInUse,
+        Permission.microphone,
+        Permission.sms
+    ].request();
 
     runApp( MainApp( prefs: prefs ) );
 }
