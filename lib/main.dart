@@ -11,10 +11,7 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     final prefs = await SharedPreferences.getInstance();
-    final statuses = await [
-        Permission.microphone,
-        Permission.sms
-    ].request();
+    await Permission.sms.request();
 
     runApp( MainApp( prefs: prefs ) );
 }
