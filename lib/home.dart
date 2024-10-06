@@ -32,9 +32,9 @@ class _HomePageState extends State<HomePage> {
     late PorcupineManager porcupineManager;
     final platform = Platform.isIOS ? "ios" : "android";
     static const apiKey = String.fromEnvironment("picovoice", defaultValue: "none");
-    String message = "Nothing ever happens";
 
     bool safe = false;
+    bool danger = false;
 
     Future<void> createPorcupineManager() async {
         porcupineManager = await PorcupineManager.fromKeywordPaths(
@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
                 "assets/I-can--t-get-up_en_${platform}_v3_0_0.ppn"
             ],
             (_) async {
+                setState( () => danger = true );
                 if( blinkFlashlight ) {
                     startBlinkingFlashlight();
                 }
@@ -60,7 +61,6 @@ class _HomePageState extends State<HomePage> {
                         sendDirect: true
                     );
                 }
-                setState( () => message = "WHAT THE FLIP" );
             }
         );
 
@@ -102,10 +102,13 @@ class _HomePageState extends State<HomePage> {
     @override
     Widget build( BuildContext context ) {
         return Scaffold(
-            body: Center( child: Text(message) ),
+            body: Center( child: Image.asset( safe ? "assets/off.png" : danger ? "assets/activated.png" : "assets/listening.png" ) ),
             floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                    setState( () => safe = !safe );
+                    setState( () {
+                        safe = !safe;
+                        danger = false;
+                    });
                     if( !safe ) {
                         TorchLight.disableTorch();
                     }

@@ -29,3 +29,6 @@ flutter:
   assets:
     - assets/I-can--t-get-up_en_android_v3_0_0.ppn
     - assets/I-can--t-get-up_en_ios_v3_0_0.ppn
+    - assets/activated.png
+    - assets/listening.png
+    - assets/off.png
