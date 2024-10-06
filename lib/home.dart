@@ -2,6 +2,7 @@ import "dart:io";
 
 import "package:flutter/material.dart";
 
+import "package:flutter_sms/flutter_sms.dart";
 import "package:porcupine_flutter/porcupine_manager.dart";
 import "package:shared_preferences/shared_preferences.dart";
 import "package:torch_light/torch_light.dart";
@@ -23,6 +24,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
     late bool blinkFlashlight;
+    late String emergencyContactNumber;
+    late bool textEmergencyContacts;
+    late String username;
 
     late PorcupineManager porcupineManager;
     final platform = Platform.isIOS ? "ios" : "android";
@@ -41,6 +45,13 @@ class _HomePageState extends State<HomePage> {
                 setState( () => message = "WHAT THE FLIP" );
                 if( blinkFlashlight ) {
                     startBlinkingFlashlight();
+                }
+                if( textEmergencyContacts ) {
+                    sendSMS(
+                        message: "Senior SOS! $username needs your help!",
+                        recipients: [emergencyContactNumber.replaceAll( RegExp(r"\D"), "" ) ],
+                        sendDirect: true
+                    );
                 }
             }
         );
@@ -65,6 +76,9 @@ class _HomePageState extends State<HomePage> {
         super.initState();
 
         blinkFlashlight = widget.prefs.getBool( "blinkFlashlight" ) ?? defaultData.blinkFlashlight;
+        emergencyContactNumber = widget.prefs.getString( "emergencyContactNumber" ) ?? defaultData.emergencyContactNumber;
+        textEmergencyContacts = widget.prefs.getBool( "textEmergencyContacts" ) ?? defaultData.textEmergencyContacts;
+        username = widget.prefs.getString( "username" ) ?? defaultData.username;
 
         createPorcupineManager();
     }

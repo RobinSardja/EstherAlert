@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "package:permission_handler/permission_handler.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 import "profile.dart";
@@ -10,6 +11,10 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     final prefs = await SharedPreferences.getInstance();
+    final statuses = await [
+        Permission.microphone,
+        Permission.sms
+    ].request();
 
     runApp( MainApp( prefs: prefs ) );
 }
